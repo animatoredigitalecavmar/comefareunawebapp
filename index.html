@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guida WebApp per Docenti</title>
+
+  <!-- Meta PWA per iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Guida WebApp">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+
+  <!-- Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    :root{
+      --bg:#f7fbff; --card:#ffffff; --accent:#6c63ff; --muted:#6b7280; --success:#10b981;
+      --radius:14px; --pad:18px; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#ffffff); color:#0f172a}
+    header{padding:28px 20px; display:flex; align-items:center; gap:14px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#8b5cf6,#06b6d4);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{font-size:1.25rem;margin:0}
+    p.lead{margin:6px 0 0;color:var(--muted);font-size:0.95rem}
+
+    main{max-width:980px;margin:18px auto;padding:0 16px 64px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+
+    .card{background:var(--card);border-radius:var(--radius);padding:var(--pad);box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    nav.side{position:sticky;top:18px}
+    nav a{display:block;padding:10px 12px;border-radius:10px;color:var(--accent);text-decoration:none;margin-bottom:8px}
+    nav a.inactive{color:var(--muted)}
+
+    section h2{margin-top:0}
+    pre{background:#0b1220;color:#dbeafe;padding:12px;border-radius:8px;overflow:auto}
+    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace}
+
+    .install-btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;text-decoration:none}
+    footer{max-width:980px;margin:32px auto;color:var(--muted);font-size:0.9rem;padding:0 16px}
+
+    .hint{background:#f1f5f9;padding:10px;border-radius:10px;color:#0f172a}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">W</div>
+    <div>
+      <h1>Guida: creare una WebApp didattica</h1>
+      <p class="lead">Passo per passo, pensata per docenti senza esperienza di programmazione.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <div>
+        <section id="ai">
+          <div class="card">
+            <h2>1. Utilizzare l'AI per generare il codice HTML</h2>
+            <p>Non sai programmare? Copia e incolla. Ecco un esempio pratico:</p>
+            <p class="hint">Usa questo file come base: modifica solo testi e immagini. Se usi ChatGPT, incolla il codice e chiedi "adattalo per la mia materia".</p>
+
+            <h3>Consigli pratici</h3>
+            <ol>
+              <li>Apri un editor di testo semplice (Blocco note su Windows, TextEdit su Mac in modalità testo, o VS Code se disponibile).</li>
+              <li>Crea un file chiamato <code>index.html</code> e incolla il codice di questa pagina.</li>
+              <li>Per cambiare colori o testi cerca in cima al file (variabili <code>:root</code>).</li>
+            </ol>
+
+            <h3>Esempio rapido — inserire una attività</h3>
+            <pre><code>&lt;section class="card"&gt;
+  &lt;h3&gt;Attività: Crea un riassunto&lt;/h3&gt;
+  &lt;p&gt;Leggi il testo e scrivi un riassunto in 5 righe.&lt;/p&gt;
+&lt;/section&gt;
+</code></pre>
+
+          </div>
+        </section>
+
+        <section id="github">
+          <div class="card" style="margin-top:16px">
+            <h2>2. Pubblicare su GitHub (passo-passo semplice)</h2>
+            <p>GitHub Pages è gratuito e non serve saper programmare: basta seguire questi passi.</p>
+
+            <h3>Passaggi rapidi</h3>
+            <ol>
+              <li>Crea un account su <strong>github.com</strong>.</li>
+              <li>Vai su <em>New Repository</em> e crea un repository pubblico (es. <code>webapp-docente</code>).</li>
+              <li>Carica i file: <code>index.html</code>, <code>manifest.json</code>, <code>sw.js</code>, cartella <code>assets</code>.</li>
+              <li>Vai in <em>Settings &gt; Pages</em> e scegli il branch <code>main</code> e la cartella <code>/ (root)</code>. Salva.</li>
+              <li>Dopo pochi minuti avrai un link tipo <code>https://tuo-username.github.io/webapp-docente/</code>.</li>
+            </ol>
+
+            <h3>Se preferisci usare il desktop (più comodo a lungo termine)</h3>
+            <pre><code># comandi minimi (opzionale, solo se ti senti a tuo agio)
+git init
+git add .
+git commit -m "prima versione"
+git branch -M main
+git remote add origin https://github.com/tuo-username/webapp-docente.git
+git push -u origin main
+</code></pre>
+
+            <p class="hint">Se non vuoi usare comandi, usa il pulsante <em>Upload files</em> nella pagina del repository su GitHub.</p>
+
+          </div>
+        </section>
+
+        <section id="condividere" style="margin-top:16px">
+          <div class="card">
+            <h2>3. Condividere il link della app</h2>
+            <p>Una volta pubblicata su GitHub Pages o su un hosting, copia il link e condividilo con gli studenti via email, Google Classroom o QR code.</p>
+
+            <h3>Creare un QR code</h3>
+            <ol>
+              <li>Vai su un generatore di QR (es. qr-code-generator.com) o chiedi all'AI: "Crea un QR per https://..."</li>
+              <li>Scarica l’immagine e inseriscila nel materiale stampato o nella piattaforma della scuola.</li>
+            </ol>
+
+            <h3>Consiglio pratico</h3>
+            <p class="hint">Usa un link breve (bit.ly o similari) se il link è lungo o vuoi tracciare click.</p>
+          </div>
+        </section>
+
+        <section id="autoinstallante" style="margin-top:16px">
+          <div class="card">
+            <h2>4. Rendere autoinstallante la WebApp (PWA)</h2>
+
+            <p>Perché "autoinstallante"? Le Progressive Web App (PWA) permettono agli utenti di installare la webapp sulla schermata principale come se fosse un'app.</p>
+
+            <h3>Requisiti principali</h3>
+            <ul>
+              <li>Pagina servita via <strong>HTTPS</strong> (GitHub Pages lo fornisce automaticamente).</li>
+              <li><code>manifest.json</code> presente e corretto.</li>
+              <li>Service worker (file <code>sw.js</code>) registrato e funzionante.</li>
+              <li>Icone corrette (192x192 e 512x512 consigliate).</li>
+            </ul>
+
+            <h3>Comportamento per piattaforma</h3>
+            <ul>
+              <li><strong>Android / Chrome:</strong> il browser mostrerà un prompt di installazione se i requisiti sono soddisfatti. Puoi anche mostrare un pulsante personalizzato che chiama il prompt.</li>
+              <li><strong>iOS / Safari:</strong> iOS non supporta completamente il prompt automatico: gli utenti devono usare il menu Condividi → "Aggiungi a Home". Metti istruzioni chiare nella pagina.</li>
+            </ul>
+
+            <h3>Codice utile: gestione del prompt di installazione</h3>
+            <pre><code>let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e; // tieni il prompt
+  document.getElementById('installBtn').style.display = 'inline-block';
+});
+
+async function installApp(){
+  if(!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const choice = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  document.getElementById('installBtn').style.display = 'none';
+}
+</code></pre>
+
+            <p class="hint">Nella nostra <code>index.html</code> c'è già un bottone con id <code>installBtn</code> che usa questo codice.</p>
+          </div>
+        </section>
+
+        <section id="idee" style="margin-top:16px">
+          <div class="card">
+            <h2>5. Idee per usi didattici</h2>
+            <ul>
+              <li><strong>Quiz rapidi</strong>: domande a scelta, feedback immediato.</li>
+              <li><strong>Mappe temporali interattive</strong> per storia.</li>
+              <li><strong>Fogli di lavoro</strong> stampabili / compilabili online.</li>
+              <li><strong>Portfolio</strong> studi degli studenti (ogni studente invia un link o un testo).</li>
+              <li><strong>Bibliografia dinamica</strong> con suggerimenti e link condivisi via QR.</li>
+            </ul>
+
+            <h3>Come progettare un'attività semplice</h3>
+            <ol>
+              <li>Definisci l'obiettivo didattico (che competenza vuoi valutare?).</li>
+              <li>Scegli formato: quiz / compito scritto / risorsa multimediale.</li>
+              <li>Scrivi testi brevi, includi esempi e un modello di risposta.</li>
+              <li>Testa la webapp tu stesso prima di condividerla con la classe.</li>
+            </ol>
+
+          </div>
+        </section>
+
+        <section id="problemi" style="margin-top:16px; margin-bottom:18px">
+          <div class="card">
+            <h2>6. Eventuali problemi e possibili soluzioni</h2>
+            <h3>Non vedo il prompt di installazione su Android</h3>
+            <ol>
+              <li>Controlla che la pagina sia servita via HTTPS.</li>
+              <li>Verifica che <code>manifest.json</code> sia raggiungibile (provalo aprendo <code>https://.../manifest.json</code>).</li>
+              <li>Apri DevTools &gt; Application per controllare manifest e service worker.</li>
+            </ol>
+
+            <h3>Su iPhone non compare il banner</h3>
+            <p>iOS non mostra il banner: istruisci gli studenti a usare "Condividi → Aggiungi a Home". Metti una nota nella pagina con screenshot o passaggi rapidi.</p>
+
+            <h3>Problemi di caching (aggiornamenti non appaiono)</h3>
+            <p>Il service worker può servire contenuti vecchi. Soluzione semplice per i docenti: cambiare il nome del file (es. <code>sw-v2.js</code>) o aggiornare il numero di versione nel service worker e chiedere agli studenti di chiudere e riaprire il browser.</p>
+
+            <h3>Accessibilità e permessi</h3>
+            <p>Non usare audio/video che richiedono permessi non necessari; se proprio usi microfono o fotocamera, spiega esattamente perché e come gli studenti possono negare l'accesso.</p>
+
+          </div>
+        </section>
+
+      </div>
+
+      <aside>
+        <nav class="card side">
+          <strong>Sezioni rapide</strong>
+          <a href="#ai">1. AI &amp; codice</a>
+          <a href="#github">2. Pubblicare su GitHub</a>
+          <a href="#condividere">3. Condividere link</a>
+          <a href="#autoinstallante">4. PWA / Autoinstallazione</a>
+          <a href="#idee">5. Idee didattiche</a>
+          <a href="#problemi">6. Problemi &amp; soluzioni</a>
+        </nav>
+
+        <div class="card" style="margin-top:12px; text-align:center">
+          <p style="margin:4px 0">Prova l'installazione</p>
+          <button id="installBtn" class="install-btn" style="display:none" onclick="installApp()">Installa questa WebApp</button>
+
+          <p style="margin-top:10px;color:var(--muted);font-size:0.9rem">iPhone: usa Condividi → Aggiungi a Home</p>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4>Checklist veloce</h4>
+          <ul>
+            <li>File <code>index.html</code> presente</li>
+            <li><code>manifest.json</code> configurato</li>
+            <li>Icone in <code>assets/icons</code></li>
+            <li>Service worker registrato</li>
+            <li>Pubblicato su HTTPS (GitHub Pages consigliato)</li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Questa guida è pensata come punto di partenza. Se vuoi, posso trasformare questo progetto in una cartella .zip pronta per il caricamento su GitHub: dimmi se vuoi il .zip.</p>
+  </footer>
+
+  <script>
+    // Registrazione service worker (se presente)
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('sw.js').then(()=>console.log('SW registrato')).catch(()=>console.log('SW fallito'));
+    }
+
+    // gestore prompt install
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('installBtn').style.display = 'inline-block';
+    });
+    async function installApp(){
+      if(!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      document.getElementById('installBtn').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
