@@ -1,23 +1,21 @@
-const CACHE_NAME = 'webapp-doc-v1';
-const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json'
-  // aggiungi qui eventuali risorse statiche (css, immagini)
-];
-
-self.addEventListener('install', (e) =>{
+self.addEventListener("install", (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+    caches.open("webapp-cache").then((cache) => {
+      return cache.addAll([
+        "index.html",
+        "style.css",
+        "manifest.json",
+        "assets/icons/icon-192.png",
+        "assets/icons/icon-512.png"
+      ]);
+    })
   );
 });
 
-self.addEventListener('activate', (e)=>{
-  e.waitUntil(self.clients.claim());
-});
-
-self.addEventListener('fetch', (e)=>{
+self.addEventListener("fetch", (e) => {
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
+    caches.match(e.request).then((response) => {
+      return response || fetch(e.request);
+    })
   );
 });
